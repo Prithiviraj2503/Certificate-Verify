@@ -2,28 +2,28 @@
   <div id="openNav">&#9776;</div>
   <div class="page-head">
  <?php if (isset($_SESSION["role"] )) {
-    $pages = ['student_list.php' => 'Student List', 'course_list.php' => 'Course List', 'add_student_page.php' => 'Add Student', 'add_course.php' => 'Add Course', 'grade_list.php' => 'Grade List', 'add_grade.php' => 'Add Grade', 'add_staff.php' => 'Add Staff', 'staff_list.php' => 'Staff List', 'student_detail.php' => 'Student Detail', 'student_detail_front.php' => 'Student Detail', 'user_detail.php' => 'User Detail', 'bulk_upload_student.php' => 'Bulk Import']; 
+    $pages = ['student_list.php' => 'Student List', 'course_list.php' => 'Course List', 'add_student.php' => 'Add Student', 'add_course.php' => 'Add Course', 'grade_list.php' => 'Grade List', 'add_grade.php' => 'Add Grade', 'add_staff.php' => 'Add Staff', 'staff_list.php' => 'Staff List', 'student_detail.php' => 'Student Detail', 'student_detail_front.php' => 'Student Detail', 'user_detail.php' => 'User Detail', 'bulk_upload_student.php' => 'Bulk Import']; 
     echo $_SESSION["role"] . " > " . $pages[$currentPage]; ?>
   </div>
   <?php if($currentPage == 'student_list.php' && $_SESSION["role"] == "admin"){ ?>
     <div>
-      <a href="add_student_page.php?mode=add">
+      <a href="add_student.php?mode=add">
       <button type="button" class="btn white" style="background: var(--primary-dark)">
         <i class="fa fa-plus"></i> Add Student
       </button>
     </a>
-    <!-- <a href="add_student_page.php?mode=add">
+    <!-- <a href="add_student.php?mode=add">
       <button type="button" class="btn white" style="background: var(--primary-dark)">
         <i class="fa fa-cloud-download"></i> Export Data
       </button>
     </a> -->
     <select id="exportdata" class="btn" style="width: 45%;  color: white; background:var(--primary-dark)">
-      <option value="">Export Data</option>
+      <option value=""> Export Data</option>
       <option value="pdf">Export as Pdf</option>
       <option value="excel">Export as Excel</option>
     </select>
     </div>
-  <?php }else if($currentPage == 'add_student_page.php'){ ?>
+  <?php }else if($currentPage == 'add_student.php'){ ?>
     <div>
     	<a href="student_list.php">
         <button type="button" class="btn white" style="background: var(--primary-dark)">

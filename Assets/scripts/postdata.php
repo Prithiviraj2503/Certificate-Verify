@@ -188,7 +188,7 @@ inputErr = !allFieldsValid;
     </script>
     <?php } ?>
 
-    <?php if ($currentPage == 'add_student_page.php'){ ?>
+    <?php if ($currentPage == 'add_student.php'){ ?>
     <script>
     $("#registerbtn").click(function(){
         validateRegisterFields()

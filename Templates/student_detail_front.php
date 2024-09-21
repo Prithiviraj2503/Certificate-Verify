@@ -12,12 +12,18 @@ if (isset($_SESSION["role"])) {
 <?php } 
 include 'header.php';
 ?>
-  <div class="main">
-    <div class="loader"></div>
+<?php if (isset($_SESSION["role"])) { ?>
+      <div class="main">
+        <div class="loader"></div>
     <?php include 'pageheader.php'; ?><br>
+    <?php } ?>
     <!-- Verification -->
     <div class="custcontainer">
+      <?php if (isset($_SESSION["role"])) { ?>
       <div class="authfield box w-mid" id="verifyfield">
+        <?php }else{ ?>
+          <div class="authfield box ww-mid" id="verifyfield">
+        <?php } ?>
         <div id="registerform">
               <center><h4>Student Details</h4></center>
               <div class="alert hide" id="message">

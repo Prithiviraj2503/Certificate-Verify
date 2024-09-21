@@ -23,13 +23,19 @@ if ($_SESSION["role"] == "admin") {
                 <div class="col-md-4 col-12">
                   <div class="form-group">
                     <label><i class="fa fa-info-circle"></i> File Data</label>
-                    <input type="file" class="input-field" placeholder="e.g) SR98492346" id="studentbulkdata" accept=".xlsx, .xls"  ><br />
+                    <input type="file" class="input-field"  id="studentbulkdata" accept=".xlsx, .xls"  ><br />
                   </div>
                 </div>
-                <div class="col-md-4 col-12">
+                <div class="col-md-4 col-12"></div>
+                <div class="col-md-4 col-12"></div>
+                <div class="col-md-2 col-12">
                 	<div class="form-group">
-                		<label style="visibility: hidden;"><i class="fa fa-info-circle"></i> File Data</label>
-                		<button type="button" id="registerbtn"><i class="fa fa-plus-circle"></i> Save</button>
+                		<button type="button" id="registerbtn" class="w-100"><i class="fa fa-upload"></i> Bulk Import</button>
+                	</div>
+                </div>
+                <div class="col-md-3 col-12">
+                	<div class="form-group">
+                		<button type="button" id="sampledata" class="w-100"><i class="fa fa-download"></i> Download Sample</button>
                 	</div>
                 </div>
 
@@ -43,10 +49,16 @@ if ($_SESSION["role"] == "admin") {
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 	<script type="text/javascript">
 		 $(document).ready(function() {
-            $("#registerbtn").on('click', function(event) {
-                var file = event.target.files[0];
+
+            $("#sampledata").click(function(){
+              window.location.href = "../Assets/samplefiles/studentsampledata.xlsx"
+            })
+
+            $("#registerbtn").click( function(event) {
+                let finput = $("#studentbulkdata")[0];
+                var file = finput.files[0];
                 if (!file) {
-                    alert("No file selected.");
+                    message("error","No file selected.");
                     return;
                 }
 
@@ -60,15 +72,15 @@ if ($_SESSION["role"] == "admin") {
                     var excelData = XLSX.utils.sheet_to_json(firstSheet, {header: 1});
                     $(".loader").show()
                     $.ajax({
-                        url: 'process_bulkstudent.php',
+                        url: '../Main/process_bulkstudent.php',
                         type: 'POST',
                         data: {excelData: JSON.stringify(excelData)},
                         success: function(response) {
-                    		$(".loader").hide()
-                            message("Data Added Successfully")
+                    		    $(".loader").hide()
+                            message("success", "Data Added Successfully")
                         },
                         error: function(xhr, status, error) {
-                            message("AJAX Error: ", status, error);
+                            message("error", "Error: "+status+" "+error);
                         }
                     });
                 };

@@ -24,7 +24,7 @@ function action(mode, regnum){
     if (mode == 'view'){
         location.href = 'student_detail.php?regnum=' + regnum;
     } else if (mode == 'edit'){
-        location.href = 'add_student_page.php?mode=edit&regnum=' + regnum;
+        location.href = 'add_student.php?mode=edit&regnum=' + regnum;
     } else if (mode == 'delete'){
         let message = "Are you sure you want to delete the student data with register number: " + regnum;
         let isdel = confirm(message);

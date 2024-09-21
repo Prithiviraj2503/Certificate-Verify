@@ -22,3 +22,6 @@
 		</div>
 	</div>
 </div>
+<footer>
+    <p>Lushanth Tech&copy;2024</p>
+ </footer>

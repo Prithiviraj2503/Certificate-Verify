@@ -12,7 +12,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 <?php if ($_SESSION["role"] == 'admin'){ ?>
 <a href="student_list.php" class="<?php echo ($currentPage == 'student_list.php') ? 'active' : ''; ?>"><i class="fa fa-users"></i> Manage Students</a>
 <a href="student_detail_front.php" class="<?php echo ($currentPage == 'student_detail_front.php') ? 'active' : ''; ?>"><i class="fa fa fa-male"></i> Student Detail</a>
-<!-- <a href="add_student_page.php?mode=add" class="<?php // echo ($currentPage == 'add_student_page.php') ? 'active' : ''; ?>"><i class="fa fa-plus-circle"></i> New Student</a> -->
+<!-- <a href="add_student.php?mode=add" class="<?php // echo ($currentPage == 'add_student.php') ? 'active' : ''; ?>"><i class="fa fa-plus-circle"></i> New Student</a> -->
 <a href="course_list.php" class="<?php echo ($currentPage == 'course_list.php') ? 'active' : ''; ?>"><i class="fa fa-book"></i> Manage Course</a>
 <a href="grade_list.php" class="<?php echo ($currentPage == 'grade_list.php') ? 'active' : ''; ?>"><i class="fa fa-bookmark"></i> Manage Grades</a>
 <a href="staff_list.php" class="<?php echo ($currentPage == 'staff_list.php') ? 'active' : ''; ?>"><i class="fa fa-user"></i> Manage Staff</a>

@@ -177,7 +177,7 @@ to {transform:rotate(360deg);}
         text-align: center;
         padding: 10px;
         width: 100%;
-        position: absolute;
+        position: fixed;
         bottom: 0;
     }
 
@@ -185,6 +185,15 @@ to {transform:rotate(360deg);}
     color: gray !important;
   }
 
+  .sidelogo .red, .sidelogo .white {
+    padding: 0 !important; /* Reset padding */
+    display: inline !important; /* Ensure spans behave inline */
+  }
+
+  /* colors */
+  .red{
+    color: red;
+  }
   /* Media query for mobile devices */
   @media screen and (max-width: 768px) {
       .sidenav {

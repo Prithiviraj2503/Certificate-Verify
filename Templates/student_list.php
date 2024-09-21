@@ -115,10 +115,10 @@ if ($_SESSION["role"] == "admin" || $_SESSION["role"] == "staff") {
                 },
                 headStyles: {
                     fontSize: 10, // Font size for header
-                    fillColor: [0, 0, 255],
+                    fillColor: [36, 38, 93],
                     textColor: [255, 255, 255],
                     lineWidth: 0.5,
-                    lineColor: [0, 0, 0],
+                    lineColor: [36, 38, 93],
                 },
                 footStyles: {
                     fontSize: 8, // Font size for footer (if any)

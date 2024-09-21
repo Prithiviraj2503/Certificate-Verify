@@ -15,6 +15,11 @@ if ($_SESSION["role"] == "admin") {
   if ($crs && $crs->num_rows > 0) {
     $crow = $crs->fetch_all(MYSQLI_ASSOC);
   }
+  $grow = [];
+  $grs = $conn->query("SELECT * FROM grade_details");
+  if ($grs && $grs->num_rows > 0) {
+    $grow = $grs->fetch_all(MYSQLI_ASSOC);
+  }
   if (isset($_GET['regnum'])){
     $regnum = $_GET['regnum'];
     $row = [];
@@ -114,12 +119,14 @@ if ($_SESSION["role"] == "admin") {
                   <div class="form-group">
                     <label><i class="fa fa-bookmark"></i> Final Grade</label><br />
                     <select class="input-field" id="grade">
-                        <option value="">Select a grade</option>
-                        <option value="A" <?php if (isset($row["final_grade"]) && $row["final_grade"] == "A") echo 'selected'; ?>>A</option>
-                        <option value="B" <?php if (isset($row["final_grade"]) && $row["final_grade"] == "B") echo 'selected'; ?>>B</option>
-                        <option value="C" <?php if (isset($row["final_grade"]) && $row["final_grade"] == "C") echo 'selected'; ?>>C</option>
-                        <option value="D" <?php if (isset($row["final_grade"]) && $row["final_grade"] == "D") echo 'selected'; ?>>D</option>
-                        <option value="Fail" <?php if (isset($row["final_grade"]) && $row["final_grade"] == "Fail") echo 'selected'; ?>>Fail</option>
+                    <?php foreach ($grow as $grade) {
+                          if (isset($row["final_grade"])) {
+                            $selectedGrade = $row["final_grade"];
+                          }
+                          $gradename = $grade['grade'];
+                          $isSelected = ($gradename === $selectedGrade) ? ' selected' : '';
+                          echo "<option value=\"{$gradename}\"{$isSelected}>{$gradename}</option>";
+                        } ?>
                     </select>
                   </div>
                 </div>
