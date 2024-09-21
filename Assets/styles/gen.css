@@ -1,0 +1,234 @@
+@import "template.css";
+/*Registeration*/
+*{
+  font-family:"verdana", sans-serif;
+}
+body{
+  background: var(--primary-color);
+}
+.logocontainer img{
+  height: 10em;
+  width: 10em;
+ }
+.centercontainer{
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--primary-color);
+  padding: 20px;
+  box-shadow: var(--primary-dark) 0px 0px 2px 1px;
+  border-radius: 3px;
+  background-color: white;
+}
+.centercontainer .card{
+  background: var(--primary-color);
+  color: white;
+  padding: 25px;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+.centercontainer div{
+
+}
+.card-title {
+     margin-bottom: 0px !important; 
+     margin-top: 0.8em;
+    font-weight: bold;
+}
+.custcontainer {
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    padding: 10px;           
+    box-sizing: border-box;     
+}
+
+.box {
+    width: 80%;
+    border: 1px solid var(--primary-color);
+    padding: 20px;
+    box-shadow: var(--primary-dark) 0px 0px 2px 1px;
+    border-radius: 3px;
+    background-color: white;
+    max-width: 100%;         
+    max-height: 100vh;      
+    overflow: auto;        
+}
+
+.w-mid{
+  width: 50% !important;
+}
+.ww-mid{
+  width: 35% !important;
+}
+
+.authfield{
+  margin-top: 1em;
+}
+.authfield input, select, textarea{
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid gray;
+  outline: none;
+  margin-bottom: 10px;
+  width: 100%;
+  -webkit-appearance: none; 
+  -moz-appearance: none;    
+  appearance: none;         
+}
+.authfield input:focus, select:focus, textarea:focus{
+  /* border: var(--primary-color); */
+  box-shadow: var(--primary-color) 0px 0px 0.9px 0.9px; 
+  outline: none;
+  border: none !important;
+}
+.authfield button{
+  padding: 8px;
+  background-color: var(--primary-dark);
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  font-weight: bold;
+  /*width: 100%;*/
+}
+td div{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+td div button {
+  padding: 5px 10px !important;
+  width: auto !important;
+  margin-left: 0.5em;
+}
+p{
+  color: rgb(15, 15, 15);
+  font-size: 0.9em;
+}
+p span{
+  color: var(--primary-text-shade);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table th{
+  text-align: center !important;
+}
+td {
+    padding: 8px;
+}
+table .label {
+    text-align: right;
+    font-weight: bold;
+    padding-right: 20px;
+    color: #003366; 
+}
+.value {
+    text-align: left;
+    color: #003366; 
+}
+.no-border {
+    border: none;
+}
+
+.space-between{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.studentdata td{
+    width: 100%;
+  }
+
+.page-head{
+  /*padding: 20px 20px 0;*/
+  /*box-sizing: border-box;*/
+  color: gray;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+@media screen and (min-width: 200px) and (max-width: 768px)  { 
+  .box {
+    width: 100%;
+  }
+  .w-mid{
+    width: 100% !important;
+  }
+  .ww-mid{
+    width: 100% !important;
+  }
+  .centercontainer div:nth-child(n+2) {
+    margin-top: 10px;
+  }
+  .studentdata td{
+    width: 50%;
+  }
+  
+  #openNav{
+    /*top: 2.5%;*/
+    position: absolute;
+  }
+  .page-head{
+    margin-left: 2em !important;
+  }
+  .authfield{
+    margin-top:2em
+  }
+} 
+
+
+@media screen and (min-width: 768px) and (max-width: 1024px) { 
+  .w-mid{
+    width: 90% !important;
+  }
+  .ww-mid{
+    width: 90% !important;
+  }
+  
+  .centercontainer {
+      width: 60%;
+    }
+
+    .centercontainer .card {
+      padding: 40px 50px;
+    }
+
+    
+  #openNav, #closeNav{
+    display: none !important;
+  }
+
+} 
+
+@media screen and (min-width: 1024px) and (max-width: 2500px) { 
+
+  #openNav, #closeNav{
+    display: none !important;
+  }
+
+  .centercontainer {
+      width: 60%;
+    }
+
+    .centercontainer .card {
+      padding: 40px 50px;
+    }
+
+} 
+ 
+@media screen and (max-width: 319px) {
+    
+    .studentdata td{
+      width: 50%;
+    }
+    
+}

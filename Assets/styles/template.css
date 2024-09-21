@@ -1,0 +1,8 @@
+:root{
+    --primary-color: #24265d;
+    --primary-dark: #181b7d;
+    --primary-text-shade : #262976;
+}
+.white{
+	color: white !important;
+}
