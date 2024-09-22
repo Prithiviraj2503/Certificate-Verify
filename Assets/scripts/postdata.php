@@ -368,6 +368,69 @@ inputErr = !allFieldsValid;
     </script>
 <?php } ?>
 
+<?php if ($currentPage == 'access_setting.php'){ ?>
+    <script>
+         $('#selectall').change(function() {
+            $('input[type="checkbox"]').not('#selectall').prop('checked', this.checked);
+        });
+
+        $('input[type="checkbox"]').not('#selectall').change(function() {
+            if ($('input[type="checkbox"]').not('#selectall').length === $('input[type="checkbox"]:checked').not('#selectall').length) {
+                $('#selectall').prop('checked', true);
+            } else {
+                $('#selectall').prop('checked', false);
+            }
+        });
+
+        $("#addaccessbtn").click(function(){
+        validateRegisterFields()
+        if(inputErr == false){
+             let roleData = {
+                "mode":$("#mode").val(),
+                "rolename":$("#rolename").val(),
+                "fullaccess":$("#selectall").is(":checked") ? true : false,
+                "viewstudent":$("#viewstudent").is(":checked") ? true : false,
+                "editstudent":$("#editstudent").is(":checked") ? true : false,
+                "viewgrade":$("#viewgrade").is(":checked") ? true : false,
+                "editgrade":$("#editgrade").is(":checked") ? true : false,
+                "viewstaff":$("#viewstaff").is(":checked") ? true : false,
+                "editstaff":$("#editstaff").is(":checked") ? true : false,
+                "viewcourse":$("#viewcourse").is(":checked") ? true : false,
+                "editcourse":$("#editcourse").is(":checked") ? true : false
+               }
+                $.ajax({
+                    url:"../Main/add_role.php", 
+                    type: "post", 
+                    dataType: 'json',
+                    data: roleData,
+                    beforeSend: function(){
+                        $(".loader").show();
+                    },
+                    success: function(output){
+                        $(".loader").hide();
+                        if (output == 1){
+                            if ($("#mode").val() == 'add'){
+                                message("success", "Role Added Successfully!")
+                                reset()
+                            }else{
+                                message("success", "Role Updated Successfully!")
+                            }
+                        }else{
+                            message("error", output)
+                        }
+                    },
+                    error:function(error){
+                        $(".loader").hide();
+                        message("error", error)
+                    }
+                });
+            }
+            });
+
+    </script>
+<?php } ?>
+
+
 <script>
     $('#certfile').on('change', function() {
       if ($(this).get(0).files.length > 0) {

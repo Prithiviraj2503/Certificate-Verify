@@ -28,12 +28,10 @@ body{
   font-size: 1.2em;
   cursor: pointer;
 }
-.centercontainer div{
 
-}
 .card-title {
-     margin-bottom: 0px !important; 
-     margin-top: 0.8em;
+    margin-bottom: 0px !important; 
+    margin-top: 0.8em;
     font-weight: bold;
 }
 .custcontainer {
@@ -67,7 +65,7 @@ body{
 .authfield{
   margin-top: 1em;
 }
-.authfield input, select, textarea{
+.authfield input[type="text"], .authfield input[type="password"], .authfield input[type="date"], .authfield input[type="file"], .authfield input[type="month"], select, textarea{
   padding: 10px;
   border-radius: 3px;
   border: 1px solid gray;
@@ -84,6 +82,31 @@ body{
   outline: none;
   border: none !important;
 }
+.custom-checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-right: 30px;
+}
+.checkboxgroup-align{
+  display: flex;
+  flex-direction: row;
+}
+.authfield input[type="chekbox"]{
+  width: inherit;
+}
+.custom-checkbox {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+.authfield .custom-checkbox:focus{
+  box-shadow:unset !important;
+  border: none;
+  outline: none;
+}
+.custom-checkbox-container div label{
+  margin-top: 8px;
+}
 .authfield button{
   padding: 8px;
   background-color: var(--primary-dark);
@@ -93,6 +116,9 @@ body{
   border-radius: 3px;
   font-weight: bold;
   /*width: 100%;*/
+}
+.maincard-title{
+  margin-bottom: 10px;
 }
 td div{
   display: flex;

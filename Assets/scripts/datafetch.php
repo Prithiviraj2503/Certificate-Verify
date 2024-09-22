@@ -417,3 +417,104 @@ updatestaff('');
 
 </script>
 <?php } ?>
+
+<!-- Staff List -->
+<?php if ($currentPage == 'access_list.php'){ ?>
+<script>
+
+function staffaction(mode, roleid) {
+    if (mode == 'edit') {
+        location.href = 'access_setting.php?mode=edit&roleid=' + roleid;
+    } else if (mode == 'delete') {
+        let message = "Are you sure you want to delete the role access data with Role: " + roleid;
+        let isdel = confirm(message);
+        if (isdel) {
+            $.ajax({
+                url: "../Main/delete_role_data.php",
+                type: "post",
+                dataType: 'json',
+                data: {"roleid": roleid},
+                beforeSend: function() {
+                    $(".loader").show();
+                },
+                success: function(output) {
+                    if (output == 1) {
+                        let searchVal = $("#searchinput").val() || '';
+                        updaterole(searchVal);
+                    } else {
+                        alert("Unable to delete the data. Kindly try again.");
+                    }
+                    $(".loader").hide();
+                },
+                error: function() {
+                    alert("Unable to delete the data. Kindly try again.");
+                    $(".loader").hide();
+                }
+            });
+        } else {
+            return false;
+        }
+    }
+}
+function updaterole(search) {
+    $.ajax({
+        url: "../Main/getall_access_data.php",
+        type: "post",
+        dataType: 'json',
+        data: {"search": search},
+        beforeSend: function() {
+            $(".loader").show();
+        },
+        success: function(output) {
+            $(".loader").hide();
+            if (output == 401) {
+                alert("Oops! You are not authorized to access this record.");
+                return;
+            }
+            let totalrec = output.length;
+            let appenddata = '';
+            let actions = '';
+            if (totalrec > 0) {
+                for (let i = 0; i < totalrec; i++) {
+                    var fullaccess = ''
+                    if (role == 'admin') {
+                        actions = `
+                            <div>
+                                <button type="button" title="Edit" style="background:green" class="btn btn-info" onclick="staffaction('edit', '` + escapeHtml(output[i]["roleid"]) + `')">
+                                    <i class="fa fa-pencil-square-o"></i>
+                                </button>
+                                <button type="button" title="Delete" style="background:tomato" class="btn btn-danger" onclick="staffaction('delete', '` + escapeHtml(output[i]["roleid"]) + `')">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>`;
+                    }
+                    if(output[i]["fullaccess"] == 0){
+                        fullaccess = "Yes"
+                    }else{
+                        fullaccess = "No"
+                    }
+                    appenddata += `<tr>
+                        <td>` + output[i]["roleid"] + `</td>
+                        <td>` + output[i]["rolename"] + `</td>
+                        <td>` + fullaccess + `</td>
+                        <td>` + actions + `</td>
+                    </tr>`;
+                }
+            } else {
+                appenddata = '<tr><td style="color:black;text-align:center" colspan="6">No Records Found!</td></tr>';
+            }
+            $("#totalrole").html("Total Role(s): " + totalrec);
+            $("#rolelist").html(appenddata);
+        },
+        error: function(error) {
+            $(".loader").hide();
+            alert("Error: " + error.responseText);
+        }
+    });
+}
+
+// Initial load
+updaterole('');
+
+</script>
+<?php } ?>

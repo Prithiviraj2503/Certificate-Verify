@@ -16,9 +16,10 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 <a href="course_list.php" class="<?php echo ($currentPage == 'course_list.php') ? 'active' : ''; ?>"><i class="fa fa-book"></i> Manage Course</a>
 <a href="grade_list.php" class="<?php echo ($currentPage == 'grade_list.php') ? 'active' : ''; ?>"><i class="fa fa-bookmark"></i> Manage Grades</a>
 <a href="staff_list.php" class="<?php echo ($currentPage == 'staff_list.php') ? 'active' : ''; ?>"><i class="fa fa-user"></i> Manage Staff</a>
+<a href="access_list.php" class="<?php echo ($currentPage == 'access_list.php') ? 'active' : ''; ?>"><i class="fa fa-user"></i> Access Settings</a>
 <!-- <a href="add_course.php?mode=add" class="<?php //echo ($currentPage == 'add_course.php') ? 'active' : ''; ?>"><i class="fa fa-book"></i> Add Course</a> -->
 <?php }else if ($_SESSION["role"] == 'staff') { ?>
-<a href="student_list.php" class="<?php echo ($currentPage == 'student_list.php') ? 'active' : ''; ?>"><i class="fa fa-users"></i> Manage Students</a>
+<a href="student_list.php" class="<?php echo ($currentPage == 'student_list.php') ? 'active' : ''; ?>"><i class="fa fa-settings"></i> Manage Students</a>
     <a href="student_detail_front.php" class="<?php echo ($currentPage == 'student_detail_front.php') ? 'active' : ''; ?>"><i class="fa fa-user"></i> Student Detail</a>
 <?php } ?>
 <a style="border-top:1px solid silver;margin-top: 50px" href="logout.php" class="logout"><i class="fa fa-power-off	

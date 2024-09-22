@@ -190,9 +190,18 @@ to {transform:rotate(360deg);}
     display: inline !important; /* Ensure spans behave inline */
   }
 
+  .flex-row{
+    display: flex;
+    flex-direction:row;
+  }
+  
+
   /* colors */
   .red{
     color: red;
+  }
+  .gray{
+    color: gray;
   }
   /* Media query for mobile devices */
   @media screen and (max-width: 768px) {
