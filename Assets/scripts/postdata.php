@@ -85,7 +85,8 @@ inputErr = !allFieldsValid;
                 "mode":$("#mode").val(),
                 "password":$("#password").val(),
                 "email":$("#email").val(),
-                "phone":$("#phone").val()
+                "phone":$("#phone").val(),
+                "rolename":$("#rolename").val()
                }
             $.ajax({
                 url:"../Main/add_staff.php", 

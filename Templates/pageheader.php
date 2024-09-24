@@ -1,3 +1,6 @@
+<?php                  
+  include '../Main/roleaccess.php';
+?>
 <div class="space-between">
   <div id="openNav">&#9776;</div>
   <div class="page-head">
@@ -30,43 +33,48 @@
           <i class="fa fa-mail-forward"></i> Student List
         </button>
       </a>
-      <a href="bulk_upload_student.php?mode=add">
+      <?php if($_SESSION['role'] == 'admin' || $accessdata['editstudent'] == true){ ?>
+        <a href="bulk_upload_student.php?mode=add">
         <button type="button" class="btn white" style="background: var(--primary-dark)">
           <i class="fa fa-cloud-upload"></i> Bulk Import
         </button>
       </a>
+      <?php } ?>
     </div>
-  <?php }else if($currentPage == 'course_list.php'){ ?>
+  <?php }else if($currentPage == 'course_list.php'){ 
+    if($_SESSION['role'] == 'admin' || $accessdata['editcourse'] == true){ ?>
     <a href="add_course.php?mode=add">
       <button type="button" class="btn white" style="background: var(--primary-dark)">
         <i class="fa fa-plus"></i> Add Course
       </button>
     </a>
-  <?php }else if($currentPage == 'add_course.php'){ ?>
+  <?php }}else if($currentPage == 'add_course.php'){ ?>
     <a href="course_list.php">
       <button type="button" class="btn white" style="background: var(--primary-dark)">
         <i class="fa fa-mail-forward"></i> Course List
       </button>
     </a>
-  <?php } else if($currentPage == 'grade_list.php'){ ?>
+  <?php } else if($currentPage == 'grade_list.php'){ 
+     if($_SESSION['role'] == 'admin' || $accessdata['editgrade'] == true){ ?>
     <a href="add_grade.php?mode=add">
       <button type="button" class="btn white" style="background: var(--primary-dark)">
         <i class="fa fa-plus"></i> Add Grade
       </button>
     </a>
-  <?php }else if($currentPage == 'add_grade.php'){ ?>
+  <?php }}else if($currentPage == 'add_grade.php'){ ?>
     <a href="grade_list.php">
       <button type="button" class="btn white" style="background: var(--primary-dark)">
         <i class="fa fa-mail-forward"></i> Grade List
       </button>
     </a>
-  <?php } else if($currentPage == 'staff_list.php'){ ?>
+  <?php } else if($currentPage == 'staff_list.php'){ 
+    if($_SESSION['role'] == 'admin' || $accessdata['editstaff'] == true){ ?>
     <a href="add_staff.php?mode=add">
       <button type="button" class="btn white" style="background: var(--primary-dark)">
         <i class="fa fa-plus"></i> Add Staff
       </button>
     </a>
-  <?php } else if($currentPage == 'add_staff.php'){ ?>
+  <?php }} else if($currentPage == 'add_staff.php'){ ?>
     <a href="staff_list.php">
       <button type="button" class="btn white" style="background: var(--primary-dark)">
         <i class="fa fa-mail-forward"></i> Staff List

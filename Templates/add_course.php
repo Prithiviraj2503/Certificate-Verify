@@ -1,11 +1,7 @@
 <?php 
 @session_start(); 
-if (!isset($_SESSION["role"]) || $_SESSION["role"] != "admin" ) {
-    header("Location: index.php");
-    exit;
-}
 include 'header.php';
-if ($_SESSION["role"] == "admin") {  
+if ($_SESSION["role"] == "admin" || ($_SESSION["role"] == "staff" && $accessdata["editcourse"] == true)) {  
   include 'title.php';
   include 'sidemenu.php';
  if (isset($_GET['mode'])){

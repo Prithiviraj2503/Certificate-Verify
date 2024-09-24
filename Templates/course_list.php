@@ -33,7 +33,9 @@ if ($_SESSION["role"] == "admin" || $_SESSION["role"] == "staff") {
                     <th>Course</th>
                     <th>Course Year</th>
                     <th>Duration</th>
+                    <?php if ($_SESSION["role"] == "admin" || ($_SESSION["role"] == "staff" && $accessdata["editcourse"] == true)) {  ?>
                     <th>Action</th>
+                    <?php } ?>
                 </tr>
             </thead>
             <tbody id="courselist">

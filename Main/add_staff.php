@@ -23,12 +23,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['phone'])) {
         $phone = $_POST['phone'];
     }
+    if (isset($_POST['rolename'])) {
+        $rolename = $_POST['rolename'];
+    }
 
     try {    
         if ($mode == 'add'){
-            $sql = "INSERT INTO staff_details (staffid, staffname, department, password, email, phone)  VALUES ('$staffid', '$staffname', '$department', '$password', '$email', '$phone')";
+            $sql = "INSERT INTO staff_details (staffid, staffname, department, password, email, phone, rolename)  VALUES ('$staffid', '$staffname', '$department', '$password', '$email', '$phone', '$rolename')";
         }else{
-            $sql = "UPDATE staff_details SET staffname = '$staffname', department = '$department', password = '$password', email = '$email', phone = '$phone' WHERE staffid = '$staffid'";
+            $sql = "UPDATE staff_details SET staffname = '$staffname', department = '$department', password = '$password', email = '$email', phone = '$phone', rolename = '$rolename' WHERE staffid = '$staffid'";
         }
 
         $result = $conn->query($sql);

@@ -31,10 +31,13 @@ if ($_SESSION["role"] == "admin" || $_SESSION["role"] == "staff") {
                     <th>S. No</th>
                     <th>Staff ID</th>
                     <th>Staff Name</th>
+                    <th>Role</th>
                     <th>Department</th>
                     <th>Email</th>
                     <th>Phone</th>
+                    <?php if ($_SESSION["role"] == "admin" || ($_SESSION["role"] == "staff" && $accessdata["editstaff"] == true)) {  ?>
                     <th>Action</th>
+                    <?php } ?>
                 </tr>
             </thead>
             <tbody id="stafflist">

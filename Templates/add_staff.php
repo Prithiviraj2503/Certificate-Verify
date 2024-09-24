@@ -1,11 +1,7 @@
 <?php 
 @session_start(); 
-if (!isset($_SESSION["role"]) || $_SESSION["role"] != "admin" ) {
-    header("Location: index.php");
-    exit;
-}
 include 'header.php';
-if ($_SESSION["role"] == "admin") {  
+if ($_SESSION["role"] == "admin" ($_SESSION["role"] == "staff" && $accessdata["editstaff"] == true)) {  
   include 'title.php';
   include 'sidemenu.php';
  if (isset($_GET['mode'])){
@@ -14,6 +10,11 @@ $crow = [];
 $crs = $conn->query("SELECT * FROM course_details");
 if ($crs && $crs->num_rows > 0) {
     $crow = $crs->fetch_all(MYSQLI_ASSOC);
+}
+$rrow = [];
+$rrs = $conn->query("SELECT * FROM access_details");
+if ($rrs && $rrs->num_rows > 0) {
+    $rrow = $rrs->fetch_all(MYSQLI_ASSOC);
 }
 if (isset($_GET['staffid'])){
     $staffid = $_GET['staffid'];
@@ -96,6 +97,23 @@ if (isset($_GET['staffid'])){
                   <div class="form-group">
                     <label><i class="fa fa-user"></i> Phone</label>
                     <input type="text" class="input-field" type="text" placeholder="e.g) 8757836578" id="phone" value="<?php if(isset($row["phone"])){ echo($row["phone"]); } ?>"><br />
+                  </div>
+                </div>
+
+                <div class="col-md-4 col-12">
+                  <div class="form-group">
+                    <label><i class="fa fa-book"></i> Role</label><br />
+                    <select class="input-field" id="rolename">
+                        <option value="">Select a role</option>
+                       <?php foreach ($rrow as $role) {
+                          if (isset($row["rolename"])) {
+                            $selectedRole = $row["rolename"];
+                          }
+                          $rolename = $role['rolename'];
+                          $isSelected = ($rolename === $selectedRole) ? ' selected' : '';
+                          echo "<option value=\"{$rolename}\"{$isSelected}>{$rolename}</option>";
+                        } ?>
+                    </select>
                   </div>
                 </div>
 

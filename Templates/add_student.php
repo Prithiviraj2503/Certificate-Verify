@@ -1,6 +1,6 @@
 <?php 
 @session_start(); 
-if (!isset($_SESSION["role"]) || $_SESSION["role"] != "admin" ) {
+if (!isset($_SESSION["role"]) || $_SESSION["role"] != "admin" ($_SESSION["role"] == "staff" && $accessdata["editstudent"] == true)) {
     header("Location: index.php");
     exit;
 }

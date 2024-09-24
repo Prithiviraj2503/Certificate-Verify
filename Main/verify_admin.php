@@ -13,8 +13,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
          session_start();
          $_SESSION['role'] = 'admin'; 
-         $_SESSION['username'] = 'Admin'; 
+         $_SESSION['username'] = $row['name']; 
          $_SESSION['userid'] = $row['userid'];  
+         $_SESSION['access'] = 'admin';  
          echo json_encode(1); 
     } else {
         $sql =  "SELECT * FROM staff_details WHERE staffid = '$adminid' AND password = '$password'";

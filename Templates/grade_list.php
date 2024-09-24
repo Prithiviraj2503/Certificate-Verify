@@ -32,7 +32,9 @@ if ($_SESSION["role"] == "admin" || $_SESSION["role"] == "staff") {
                     <th>Grade</th>
                     <th>Mark Range</th>
                     <th>Status</th>
+                    <?php if ($_SESSION["role"] == "admin" || ($_SESSION["role"] == "staff" && $accessdata["editgrade"] == true)) {  ?>
                     <th>Action</th>
+                    <?php } ?>
                 </tr>
             </thead>
             <tbody id="gradelist">

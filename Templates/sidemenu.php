@@ -1,5 +1,6 @@
 <?php
 @session_start();
+include '../Main/roleaccess.php';
 $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 <div id="mySidenav" class="sidenav">
@@ -11,7 +12,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 <span href="javascript:void(0)" class="closebtn" id="closeNav">&times;</span>
 <?php if ($_SESSION["role"] == 'admin'){ ?>
 <a href="student_list.php" class="<?php echo ($currentPage == 'student_list.php') ? 'active' : ''; ?>"><i class="fa fa-users"></i> Manage Students</a>
-<a href="student_detail_front.php" class="<?php echo ($currentPage == 'student_detail_front.php') ? 'active' : ''; ?>"><i class="fa fa fa-male"></i> Student Detail</a>
+<a href="student_detail_front.php" class="<?php echo ($currentPage == 'student_detail_front.php') ? 'active' : ''; ?>"><i class="fa fa-male"></i> Student Detail</a>
 <!-- <a href="add_student.php?mode=add" class="<?php // echo ($currentPage == 'add_student.php') ? 'active' : ''; ?>"><i class="fa fa-plus-circle"></i> New Student</a> -->
 <a href="course_list.php" class="<?php echo ($currentPage == 'course_list.php') ? 'active' : ''; ?>"><i class="fa fa-book"></i> Manage Course</a>
 <a href="grade_list.php" class="<?php echo ($currentPage == 'grade_list.php') ? 'active' : ''; ?>"><i class="fa fa-bookmark"></i> Manage Grades</a>
@@ -19,9 +20,19 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 <a href="access_list.php" class="<?php echo ($currentPage == 'access_list.php') ? 'active' : ''; ?>"><i class="fa fa-user"></i> Access Settings</a>
 <!-- <a href="add_course.php?mode=add" class="<?php //echo ($currentPage == 'add_course.php') ? 'active' : ''; ?>"><i class="fa fa-book"></i> Add Course</a> -->
 <?php }else if ($_SESSION["role"] == 'staff') { ?>
-<a href="student_list.php" class="<?php echo ($currentPage == 'student_list.php') ? 'active' : ''; ?>"><i class="fa fa-settings"></i> Manage Students</a>
-    <a href="student_detail_front.php" class="<?php echo ($currentPage == 'student_detail_front.php') ? 'active' : ''; ?>"><i class="fa fa-user"></i> Student Detail</a>
+    <?php if($accessdata["viewstudent"] == true){ ?>
+        <a href="student_list.php" class="<?php echo ($currentPage == 'student_list.php') ? 'active' : ''; ?>"><i class="fa fa-users"></i> Manage Students</a>
+        <a href="student_detail_front.php" class="<?php echo ($currentPage == 'student_detail_front.php') ? 'active' : ''; ?>"><i class="fa fa-male"></i> Student Detail</a>
+    <?php } ?>
+    <?php if($accessdata["viewstaff"] == true){ ?>
+        <a href="staff_list.php" class="<?php echo ($currentPage == 'staff_list.php') ? 'active' : ''; ?>"><i class="fa fa-user"></i> Manage Staff</a>
+    <?php } ?>
+    <?php if($accessdata["viewcourse"] == true){ ?>
+        <a href="course_list.php" class="<?php echo ($currentPage == 'course_list.php') ? 'active' : ''; ?>"><i class="fa fa-book"></i> Manage Course</a>
+    <?php } ?>
+    <?php if($accessdata["viewgrade"] == true){ ?>
+        <a href="grade_list.php" class="<?php echo ($currentPage == 'grade_list.php') ? 'active' : ''; ?>"><i class="fa fa-bookmark"></i> Manage Grade</a>
+    <?php } ?>
 <?php } ?>
-<a style="border-top:1px solid silver;margin-top: 50px" href="logout.php" class="logout"><i class="fa fa-power-off	
-"></i> Logout</a>
+<a style="border-top:1px solid silver;margin-top: 50px" href="logout.php" class="logout"><i class="fa fa-power-off"></i> Logout</a>
 </div>

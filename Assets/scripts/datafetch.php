@@ -1,6 +1,10 @@
 <?php
 @session_start();
 $currentPage = basename($_SERVER['PHP_SELF']);
+if(isset($_SESSION["role"])){
+    $role = $_SESSION["role"];
+}
+include '../Main/roleaccess.php';
 ?>
 <script type="text/javascript">
     let role = "<?php echo isset($_SESSION['role']) ? $_SESSION['role'] : ''; ?>";
@@ -76,7 +80,7 @@ function updatestudent(search){
             let actions = '';
             if (totalrec > 0){
                 for(let i = 0; i < totalrec; i++){
-                    if (role == 'admin') {
+                  <?php  if ($role == 'admin' || ($_SESSION["role"] == "staff" && $accessdata["editstudent"] == true)) { ?>
                         actions = `
                             <div>
                                 <button title="View" type="button" style="background:blue" class="btn btn-eye" onclick="action('view', '` + escapeHtml(output[i]["register_number"]) + `')">
@@ -89,23 +93,26 @@ function updatestudent(search){
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </div>`;
-                    } else {
+                   <?php } else if($_SESSION["role"] == "staff" && $accessdata["editstudent"] == false) { ?>
                         actions = `
                             <div>
                                 <button type="button" style="background:blue" class="btn btn-eye" onclick="action('view', '` + escapeHtml(output[i]["register_number"]) + `')">
                                     <i class="fa fa-eye"></i>
                                 </button>
                             </div>`;
-                    }
+                  <?php  } ?>
 
                     appenddata += `<tr>
                     <td>`+(i+1)+`</td>
                     <td>`+escapeHtml(output[i]["register_number"])+`</td>
                     <td>`+escapeHtml(output[i]["student_name"])+`</td>
                     <td>`+escapeHtml(output[i]["course"])+`</td>
-                    <td>`+escapeHtml(output[i]["final_grade"])+`</td>
-                    <td>`+actions+`</td>
-                    </tr>`;
+                    <td>`+escapeHtml(output[i]["final_grade"])+`</td>`
+                    if (actions != '') {
+                    appenddata += `<td>` + actions + `</td>`;
+                    }
+
+                    appenddata += `</tr>`;
                 }
             } else {
                 appenddata = '<tr><td style="color:black;text-align:center" colspan="7">No Records Found!</td></tr>';
@@ -182,7 +189,7 @@ function updatecourse(search) {
             let actions = '';
             if (totalrec > 0) {
                 for (let i = 0; i < totalrec; i++) {
-                    if (role == 'admin') {
+                   <?php if ($role == 'admin' || ($_SESSION["role"] == "staff" && $accessdata["editcourse"] == true)) { ?>
                         actions = `
                             <div>
                                 <button type="button" title="Edit" style="background:green" class="btn btn-info" onclick="courseaction('edit', '` + escapeHtml(output[i]["courseid"]) + `')">
@@ -192,16 +199,19 @@ function updatecourse(search) {
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </div>`;
-                    }
+                    <?php  } ?>
                     
                     appenddata += `<tr>
                         <td>` + (i+1) + `</td>
                         <td>` + escapeHtml(output[i]["courseid"]) + `</td>
                         <td>` + escapeHtml(output[i]["course"]) + `</td>
                         <td>` + escapeHtml(output[i]["courseyear"]) + `</td>
-                        <td>` + escapeHtml(output[i]["duration"]) + `</td>
-                        <td>` + actions + `</td>
-                    </tr>`;
+                        <td>` + escapeHtml(output[i]["duration"]) + `</td>`;
+                        if (actions != '') {
+                        appenddata += `<td>` + actions + `</td>`;
+                        }
+
+                    appenddata += `</tr>`;
                 }
             } else {
                 appenddata = '<tr><td style="color:black;text-align:center" colspan="6">No Records Found!</td></tr>';
@@ -280,7 +290,7 @@ function updategrade(search) {
             let actions = '';
             if (totalrec > 0) {
                 for (let i = 0; i < totalrec; i++) {
-                    if (role == 'admin') {
+                    <?php if ($role == 'admin' || ($_SESSION["role"] == "staff" && $accessdata["editgrade"] == true)) { ?>
                         actions = `
                             <div>
                                 <button type="button" title="Edit" style="background:green" class="btn btn-info" onclick="gradeaction('edit', '` + escapeHtml(output[i]["grade"]) + `')">
@@ -290,15 +300,18 @@ function updategrade(search) {
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </div>`;
-                    }
+                    <?php } ?>
                     
                     appenddata += `<tr>
                         <td>` + (i+1) + `</td>
                         <td>` + escapeHtml(output[i]["grade"]) + `</td>
                         <td>` + escapeHtml(output[i]["markrange"]) + `</td>
-                        <td>` + escapeHtml(output[i]["status"]) + `</td>
-                        <td>` + actions + `</td>
-                    </tr>`;
+                        <td>` + escapeHtml(output[i]["status"]) + `</td>`
+                        if (actions != '') {
+                        appenddata += `<td>` + actions + `</td>`;
+                        }
+
+                    appenddata += `</tr>`;
                 }
             } else {
                 appenddata = '<tr><td style="color:black;text-align:center" colspan="6">No Records Found!</td></tr>';
@@ -377,7 +390,7 @@ function updatestaff(search) {
             let actions = '';
             if (totalrec > 0) {
                 for (let i = 0; i < totalrec; i++) {
-                    if (role == 'admin') {
+                   <?php if ($role == 'admin' || ($_SESSION["role"] == "staff" && $accessdata["editstaff"] == true)) { ?>
                         actions = `
                             <div>
                                 <button type="button" title="Edit" style="background:green" class="btn btn-info" onclick="staffaction('edit', '` + escapeHtml(output[i]["staffid"]) + `')">
@@ -387,17 +400,21 @@ function updatestaff(search) {
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </div>`;
-                    }
+                    <?php } ?>
                     
                     appenddata += `<tr>
                         <td>` + (i+1) + `</td>
                         <td>` + escapeHtml(output[i]["staffid"]) + `</td>
                         <td>` + escapeHtml(output[i]["staffname"]) + `</td>
+                        <td>` + escapeHtml(output[i]["rolename"]) + `</td>
                         <td>` + escapeHtml(output[i]["department"]) + `</td>
                         <td>` + escapeHtml(output[i]["email"]) + `</td>
-                        <td>` + escapeHtml(output[i]["phone"]) + `</td>
-                        <td>` + actions + `</td>
-                    </tr>`;
+                        <td>` + escapeHtml(output[i]["phone"]) + `</td>`;
+                        if (actions != '') {
+                        appenddata += `<td>` + actions + `</td>`;
+                        }
+
+                    appenddata += `</tr>`;
                 }
             } else {
                 appenddata = '<tr><td style="color:black;text-align:center" colspan="6">No Records Found!</td></tr>';
@@ -496,9 +513,12 @@ function updaterole(search) {
                     appenddata += `<tr>
                         <td>` + output[i]["roleid"] + `</td>
                         <td>` + output[i]["rolename"] + `</td>
-                        <td>` + fullaccess + `</td>
-                        <td>` + actions + `</td>
-                    </tr>`;
+                        <td>` + fullaccess + `</td>`;
+                        if (actions != '') {
+                        appenddata += `<td>` + actions + `</td>`;
+                        }
+
+                    appenddata += `</tr>`;
                 }
             } else {
                 appenddata = '<tr><td style="color:black;text-align:center" colspan="6">No Records Found!</td></tr>';

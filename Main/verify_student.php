@@ -15,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         @session_start();
         $_SESSION['role'] = "student";
         $_SESSION['username'] = $row["student_name"];
+        $_SESSION['access'] = 'student';  
         echo json_encode(1); 
     } else {
         echo json_encode(0); 

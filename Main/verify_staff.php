@@ -14,7 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          $row = $result->fetch_assoc();
          session_start();
          $_SESSION['role'] = 'staff'; 
-         $_SESSION['username'] = $row['staffname']; 
+         $_SESSION['username'] = $row['staffname'];
+         $_SESSION['access'] = $row['rolename'];  
          echo json_encode(1); 
     } else {
         echo json_encode(0); 
